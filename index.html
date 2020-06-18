@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>
+		Fluxo de Caixa
+	</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet"/>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet"/>
+	<link href="./css/main.css" rel="stylesheet"/>
+</head>
+
+<body>
+	<div class="container">
+		<h1>Fluxo de caixa </h1>
+		<div id="menu2" class="menu d-flex justify-content-between">
+			<ul id="menu" class="nav nav-tabs">
+				<li class="nav-item">
+					<a class="nav-link active" id="nav1" onclick="callBox(1, 'containerBody', 'containerBody')"
+						href="#">Primeira semana</a>
+				</li>
+			</ul>
+			<button type="button" onclick="addNewPeriod()" class="btn btn-success btn-sm">+</button>
+		</div>
+		<div class="shadow p-3 mb-5 bg-white rounded">
+			<div id="containerBody">
+				<div class="d-flex">
+					<div class="col-6">
+						<div class="card">
+							<div class="card-body">
+								<h5 class="card-title">Atividades operacionais</h5>
+								<div
+									class="input-group input-group-sm mb-3 d-flex align-items-start flex-column bd-highlight mb-3">
+									<div class="p-1 bd-highlight add">
+										<span>Recebimento de clientes/outros</span><br>
+									</div>
+									<input type="number" min="0.00" max="10000.00" step="0.01" name="recClientes"
+										class="form-control  w-100 fieldadd" placeholder="R$ 0.0"
+										aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+								</div>
+								<div
+									class="input-group input-group-sm mb-3 d-flex align-items-start flex-column bd-highlight mb-3">
+									<div class="p-1 bd-highlight ">
+										<span>Pagamento a Fornecedores</span><br>
+									</div>
+									<input type="number" min="0.00" max="10000.00" step="0.01" name="pagFornecedores"
+										class="form-control  w-100 " placeholder="R$ 0.0"
+										aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+								</div>
+								<div
+									class="input-group input-group-sm mb-3 d-flex align-items-start flex-column bd-highlight mb-3">
+									<div class="p-1 bd-highlight  ">
+										<span>Pagamento a Funcionarios</span><br>
+									</div>
+									<input type="number" min="0.00" max="10000.00" step="0.01" name="pagFuncionarios"
+										class="form-control  w-100 " placeholder="R$ 0.0"
+										aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+								</div>
+								<div
+									class="input-group input-group-sm mb-3 d-flex align-items-start flex-column bd-highlight mb-3">
+									<div class="p-1 bd-highlight remove">
+										<span>Recolhimentos ao Governo</span><br>
+									</div>
+									<input type="number" min="0.00" max="10000.00" step="0.01" name="recolGoverno"
+										class="form-control  w-100 fieldrm" placeholder="R$ 0.0"
+										aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+								</div>
+								<div
+									class="input-group input-group-sm mb-3 d-flex align-items-start flex-column bd-highlight mb-3">
+									<div class="p-1 bd-highlight">
+										<span>Pagamento a Credores Diversos</span><br>
+									</div>
+									<input type="number" min="0.00" max="10000.00" step="0.01" name="pagDividas"
+										class="form-control  w-100" placeholder="R$ 0.0"
+										aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+								</div>
+								<div class="row d-flex justify-content-end">
+									<span style="font-size:1.2rem">Balanço do período At/OP: <span
+											id="balancoOperacional" class="">R$ 0.0</span></span><br>
+								</div>
+							</div>
+						</div>
+						<div class="card">
+							<div class="card-body">
+								<h5 class="card-title">Atividades de financiamento</h5>
+								<div
+									class="input-group input-group-sm mb-3 d-flex align-items-start flex-column bd-highlight mb-3">
+									<div class="p-1 bd-highlight">
+										<span>Novos Empréstimos</span><br>
+									</div>
+									<input type="number" min="0.00" max="10000.00" step="0.01" name="emprestimos"
+										class="form-control  w-100" placeholder="R$ 0.0"
+										aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+								</div>
+								<div
+									class="input-group input-group-sm mb-3 d-flex align-items-start flex-column bd-highlight mb-3">
+									<div class="p-1 bd-highlight remove">
+										<span>Amortização de Empréstimos</span><br>
+									</div>
+									<input type="number" min="0.00" max="10000.00" step="0.01"
+										name="armotizacaoEmprestimos" class="form-control  w-100 fieldrm"
+										placeholder="R$ 0.0" aria-label="Sizing example input"
+										aria-describedby="inputGroup-sizing-sm">
+								</div>
+								<div
+									class="input-group input-group-sm mb-3 d-flex align-items-start flex-column bd-highlight mb-3">
+									<div class="p-1 bd-highlight add">
+										<span>Emissão de Debêntures</span><br>
+									</div>
+									<input type="number" min="0.00" max="10000.00" step="0.01" name="debentures"
+										class="form-control  w-100 fieldadd" placeholder="R$ 0.0"
+										aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+								</div>
+								<div
+									class="input-group input-group-sm mb-3 d-flex align-items-start flex-column bd-highlight mb-3">
+									<div class="p-1 bd-highlight add">
+										<span>Integralização de capital</span><br>
+									</div>
+									<input type="number" min="0.00" max="10000.00" step="0.01"
+										name="integralizacaoCapital" class="form-control  w-100 fieldadd"
+										placeholder="R$ 0.0" aria-label="Sizing example input"
+										aria-describedby="inputGroup-sizing-sm">
+								</div>
+								<div
+									class="input-group input-group-sm mb-3 d-flex align-items-start flex-column bd-highlight mb-3">
+									<div class="p-1 bd-highlight remove">
+										<span>Pagamento de dividendos</span><br>
+									</div>
+									<input type="number" min="0.00" max="10000.00" step="0.01" name="pagDividendos"
+										class="form-control  w-100 fieldrm" placeholder="R$ 0.0"
+										aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+								</div>
+								<div class="row d-flex justify-content-end">
+									<span style="font-size:1.2rem">Balanço do período At/FIN: <span
+											id="balancoFinanciamento" class="">R$ 0.0</span></span><br>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-6">
+						<div class="card">
+							<div class="card-body">
+								<h5 class="card-title">Atividades de investimento</h5>
+								<div
+									class="input-group input-group-sm mb-3 d-flex align-items-start flex-column bd-highlight mb-3">
+									<div class="p-1 bd-highlight add">
+										<span>Recebimento de Vendas imobiliarias</span><br>
+									</div>
+									<input type="number" min="0.00" max="10000.00" step="0.01" name="recImobiliarias"
+										class="form-control  w-100 fieldadd" placeholder="R$ 0.0"
+										aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+								</div>
+								<div
+									class="input-group input-group-sm mb-3 d-flex align-items-start flex-column bd-highlight mb-3">
+									<div class="p-1 bd-highlight">
+										<span>Aquisição de Ativos Permanente</span><br>
+									</div>
+									<input type="number" min="0.00" max="10000.00" step="0.01"
+										name="aquisicaoAtivoPermanente" class="form-control  w-100 "
+										placeholder="R$ 0.0" aria-label="Sizing example input"
+										aria-describedby="inputGroup-sizing-sm">
+								</div>
+								<div
+									class="input-group input-group-sm mb-3 d-flex align-items-start flex-column bd-highlight mb-3">
+									<div class="p-1 bd-highlight add">
+										<span>Recebimento de dividendos</span><br>
+									</div>
+									<input type="number" min="0.00" max="10000.00" step="0.01" name="recDividendos"
+										class="form-control  w-100 fieldadd" placeholder="R$ 0.0"
+										aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+								</div>
+								<div class="row d-flex justify-content-end">
+									<span style="font-size:1.2rem">Balanço do período At/INV: <span
+											id="balancoInvestimento" class="">R$ 0.0</span></span><br>
+								</div>
+							</div>
+						</div>
+						<div class="card">
+							<div class="card-body">
+								<h5 class="card-title">Disponibilidades</h5>
+								<span style="font-size:1.1rem">Balanço total At/OP: <span id="totalBalOp" class="">R$
+										0.0</span></span><br>
+								<span style="font-size:1.1rem">Balanço total At/IN: <span id="totalBalInv" class="">R$
+										0.0</span></span><br>
+								<span style="font-size:1.1rem">Balanço total At/FIN: R$ <span id="totalBalFinanc"
+										class="">R$ 0.0</span></span><br>
+								<span style="font-size:1.1rem">Balanço Final: <span id="totalBalFinal"
+										class="goodMoney">R$ 0.0</span></span><br>
+										<canvas id="canvas" width="400" height="400"></canvas>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	</div>
+	    <footer>
+        <div class="footer-copyright text-center py-3 font-small">Desenvolvido por
+			<a href="https://github.com/camilaPereir">Camila Pereira</a> e 
+			<a href="https://github.com/LuanGrillo">Luan Grillo</a>
+        </div>
+    </footer>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+<script src="https://www.chartjs.org/samples/latest/utils.js"></script>
+<script src="./js/main.js"></script>
+<script src="./js/optionCharts.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+</html>

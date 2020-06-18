@@ -1,0 +1,97 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.container h1 {
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+}
+
+.container .shadow {
+    border-radius: 0rem 0.5rem 0.5rem 3rem !important;
+}
+
+.container .menu button {
+    height: 2rem;
+}
+
+.container .card {
+    margin-bottom: 2.5rem;
+}
+
+.container .card .p-1 {
+    border-radius: 0.8rem 0.8rem 0rem 0rem !important;
+    padding-left: 30px;
+    font-style: italic;
+    color: aliceblue;
+    background-color: rgb(134, 21, 187);
+}
+
+.container .form-control:focus {
+    border-color: rgba(134, 21, 187, 0.8);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(134, 21, 187, 0.6);
+    outline: 0 none;
+}
+
+.container .card .remove {
+    background-color: rgb(228, 12, 12) !important;
+}
+
+.container .fieldrm:focus {
+    border-color: rgba(228, 12, 12, 0.8) !important;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(228, 12, 12, 0.6) !important;
+    outline: 0 none;
+}
+
+.container .card .add {
+    background-color: rgb(11, 165, 101) !important;
+}
+
+.container .fieldadd:focus {
+    border-color: rgba(17, 136, 66, 0.8) !important;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(17, 136, 66, 0.6) !important;
+    outline: 0 none;
+}
+
+.badMoney {
+    color: rgb(177, 10, 10);
+    font-weight: bold;
+    -webkit-animation: fadein 2s linear !important;
+    animation: fadein 2s linear !important;
+}
+
+.goodMoney {
+    color: rgb(10, 177, 46);
+    font-weight: bold;
+    -webkit-animation: fadein 2s linear;
+    animation: fadein 2s linear;
+}
+
+.fadein {
+    -webkit-animation: fadein 2s linear;
+    animation: fadein 2s linear;
+}
+
+@-webkit-keyframes fadein {
+
+    0%,
+    100% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadein {
+
+    0%,
+    100% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
