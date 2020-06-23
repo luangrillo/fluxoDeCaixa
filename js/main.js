@@ -193,7 +193,7 @@ function changeModal() {
     }
     function changeModal(element, value) {
         var elementVar = document.getElementById(element)
-        balancoFinal[value].forEach(element => { finalResult(element, value) })
+        balancoFinal[value].forEach(element => { finalResult(element, value); })
         elementVar.innerHTML = balancoVar[value].toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
         if (balancoVar[value] >= 0) {
             elementVar.classList.add("badMoney")
@@ -218,6 +218,10 @@ function changeModal() {
         elementVar.classList.remove("goodMoney")
         elementVar.classList.add("badMoney")
     }
-
+    
+    balancoVar["balancoFinalOperacional"] = 0
+    balancoVar["balancoFinalInvestimentos"] = 0
+    balancoVar["balancoFinalFinanceiro"] = 0
+    balancoVar.final = 0
 
 }
