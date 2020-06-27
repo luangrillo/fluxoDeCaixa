@@ -27,6 +27,16 @@ body {
     background-color: rgb(134, 21, 187);
 }
 
+.container .card .saldo{
+    border-color: rgb(11, 156, 156);
+    background-color:  rgb(11, 156, 156) !important;
+    border-radius: 0.8rem 0.8rem 0rem 0rem !important;
+    color: aliceblue;
+    font-style: normal;
+    padding-left: 30px;
+    outline: 0 none;
+}
+
 .container .form-control:focus {
     border-color: rgba(134, 21, 187, 0.8);
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(134, 21, 187, 0.6);
