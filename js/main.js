@@ -27,14 +27,27 @@ class caixa {
             this.balancoInvestimento = balancoInvestimento
         }
     }
+
+    static saldo = class {
+        constructor(saldo, saldoInicial) {
+            this.saldo = saldo
+            this.saldoInicial = saldoInicial
+        }
+    }
+
     static totalBalanco = class {
-        constructor(balancoFinalOperacional, balancoFinalFinanceiro, balancoFinalInvestimentos, final) {
+        constructor(balancoFinalOperacional, balancoFinalFinanceiro, balancoFinalInvestimentos, final, saldo, saldoInicial) {
             this.balancoFinalOperacional = balancoFinalOperacional
             this.balancoFinalFinanceiro = balancoFinalFinanceiro
             this.balancoFinalInvestimentos = balancoFinalInvestimentos
             this.final = final
+            this.saldo = saldo
+            this.saldoInicial = saldoInicial
         }
     }
+
+    
+
     static add = function () {
         let varDump = new Object();
         Object.assign(varDump, new caixa.atvOperacional(0, 0, 0, 0, 0, "0"))
@@ -47,8 +60,8 @@ class caixa {
 var period = []
 let selectedPeriod = 1
 
-var balancoFinal = new caixa.totalBalanco([], [], [], [])
-var balancoVar = new caixa.totalBalanco(0, 0, 0, 0)
+var balancoFinal = new caixa.totalBalanco([], [], [], [], [], [])
+var balancoVar = new caixa.totalBalanco(0, 0, 0, 0, 0, 0)
 
 //Inicializa primeiro periodo
 period.push(new caixa.add)
@@ -59,6 +72,7 @@ window.onchange = async function () {
     let display = container.getElementsByTagName("span")
     let menu = document.getElementById("menu")
     let periods = menu.getElementsByTagName("li").length
+    let saldo = document.querySelector("[name=saldo]")
 
     for (i = 0; i < inputs.length; i++) {
         // Atualiza valores no objeto
@@ -70,38 +84,45 @@ window.onchange = async function () {
             period[selectedPeriod - 1][inputs[i].name] = Number(inputs[i].value)
         }
         // Realiza a atualizacao do valor por balanco e periodo das atividades
-        switch (i) {
+
+         switch (i) {
+            case 0:
+                saldo.setAttribute('disabled', 'disabled');
+                period[selectedPeriod - 1].saldo = 0
+                period[selectedPeriod - 1].saldo += Math.abs(inputs[0].value)
+                balancoFinal.saldo[selectedPeriod - 1] = period[selectedPeriod - 1].saldo
             case 4:
                 period[selectedPeriod - 1].balancoOperacional = 0
-                period[selectedPeriod - 1].balancoOperacional += Math.abs(inputs[0].value)
-                period[selectedPeriod - 1].balancoOperacional += -Math.abs(inputs[1].value)
+                period[selectedPeriod - 1].balancoOperacional += Math.abs(inputs[1].value)
                 period[selectedPeriod - 1].balancoOperacional += -Math.abs(inputs[2].value)
                 period[selectedPeriod - 1].balancoOperacional += -Math.abs(inputs[3].value)
                 period[selectedPeriod - 1].balancoOperacional += -Math.abs(inputs[4].value)
+                period[selectedPeriod - 1].balancoOperacional += -Math.abs(inputs[5].value)
                 balancoFinal.balancoFinalOperacional[selectedPeriod - 1] = period[selectedPeriod - 1].balancoOperacional
                 break;
             case 7:
                 period[selectedPeriod - 1].balancoFinanciamento = 0
-                period[selectedPeriod - 1].balancoFinanciamento += -Math.abs(inputs[5].value)
                 period[selectedPeriod - 1].balancoFinanciamento += -Math.abs(inputs[6].value)
-                period[selectedPeriod - 1].balancoFinanciamento += Math.abs(inputs[7].value)
+                period[selectedPeriod - 1].balancoFinanciamento += -Math.abs(inputs[7].value)
                 period[selectedPeriod - 1].balancoFinanciamento += Math.abs(inputs[8].value)
-                period[selectedPeriod - 1].balancoFinanciamento += -Math.abs(inputs[9].value)
+                period[selectedPeriod - 1].balancoFinanciamento += Math.abs(inputs[9].value)
+                period[selectedPeriod - 1].balancoFinanciamento += -Math.abs(inputs[10].value)
                 balancoFinal.balancoFinalFinanceiro[selectedPeriod - 1] = period[selectedPeriod - 1].balancoFinanciamento
                 break;
             case 12:
                 period[selectedPeriod - 1].balancoInvestimento = 0
-                period[selectedPeriod - 1].balancoInvestimento += Math.abs(inputs[10].value)
-                period[selectedPeriod - 1].balancoInvestimento += -Math.abs(inputs[11].value)
-                period[selectedPeriod - 1].balancoInvestimento += Math.abs(inputs[12].value)
+                period[selectedPeriod - 1].balancoInvestimento += Math.abs(inputs[11].value)
+                period[selectedPeriod - 1].balancoInvestimento += -Math.abs(inputs[12].value)
+                period[selectedPeriod - 1].balancoInvestimento += Math.abs(inputs[13].value)
                 balancoFinal.balancoFinalInvestimentos[selectedPeriod - 1] = period[selectedPeriod - 1].balancoInvestimento
                 break;
-
-        }
-
-
+    
+            }
+            
     }
     changeModal();
+
+    
 }
 async function callBox(id, idIn, idOut) {
     selectedPeriod = id
@@ -138,6 +159,10 @@ async function callBox(id, idIn, idOut) {
     balancoFinanciamento.innerHTML = convertModal(period[selectedPeriod - 1].balancoFinanciamento);
     var balancoInvestimento = document.getElementById("balancoInvestimento");
     balancoInvestimento.innerHTML = convertModal(period[selectedPeriod - 1].balancoInvestimento);
+
+    var saldoInicial = document.getElementById("saldoInicial");
+    saldoInicial.innerHTML = convertModal(period[selectedPeriod - 1].saldoInicial);
+
 
     await new Promise(resolve => setTimeout(resolve, 2000))
     document.getElementById(idIn).classList.remove("fadein")
@@ -186,6 +211,8 @@ function changeModal() {
         balancoInvestimento.classList.remove("goodMoney")
         balancoInvestimento.classList.add("badMoney")
     }
+
+
     //MODAL DISPONIBILIDADES
 
     function finalResult(element, id) {
@@ -207,9 +234,10 @@ function changeModal() {
     changeModal("totalBalOp", "balancoFinalOperacional")
     changeModal("totalBalInv", "balancoFinalInvestimentos")
     changeModal("totalBalFinanc", "balancoFinalFinanceiro")
+    changeModal("saldoInicial", "saldo")
 
     var elementVar = document.getElementById("totalBalFinal")
-    balancoVar.final = balancoVar["balancoFinalOperacional"] + balancoVar["balancoFinalInvestimentos"] + balancoVar["balancoFinalFinanceiro"]
+    balancoVar.final = balancoVar["balancoFinalOperacional"] + balancoVar["balancoFinalInvestimentos"] + balancoVar["balancoFinalFinanceiro"] + balancoVar["saldo"]
     elementVar.innerHTML = balancoVar.final.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
     if (balancoVar.final >= 0) {
         elementVar.classList.add("badMoney")
@@ -222,6 +250,8 @@ function changeModal() {
     balancoVar["balancoFinalOperacional"] = 0
     balancoVar["balancoFinalInvestimentos"] = 0
     balancoVar["balancoFinalFinanceiro"] = 0
+    balancoVar["saldo"] = 0
     balancoVar.final = 0
+
 
 }
