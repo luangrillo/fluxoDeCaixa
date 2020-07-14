@@ -1,2 +1,2 @@
 # fluxoDeCaixa
-Fluxo de caixa semanal, desenvolvido em HTML5 e Js 6 
+Fluxo de caixa semanal, desenvolvido em HTML5 e ES6.
